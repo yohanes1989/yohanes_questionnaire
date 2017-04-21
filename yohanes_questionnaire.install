@@ -1,0 +1,8 @@
+<?php
+
+function yohanes_questionnaire_install()
+{
+    user_role_change_permissions(\Drupal\user\RoleInterface::AUTHENTICATED_ID, [
+        'take questionnaire' => TRUE
+    ]);
+}

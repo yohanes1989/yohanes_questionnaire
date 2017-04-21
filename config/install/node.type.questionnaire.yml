@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - yohanes_questionnaire
+name: Questionnaire
+type: questionnaire
+description: Content to create a Questionnaire with questions
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: false

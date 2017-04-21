@@ -1,0 +1,28 @@
+view questionnaire results:
+  title: 'View All Questionnaire results'
+
+take questionnaire:
+  title: 'Take Questionnaire'
+
+add question entities:
+  title: 'Create new Question entities'
+
+administer question entities:
+  title: 'Administer Question entities'
+  description: 'Allow to access the administration form to configure Question entities.'
+  restrict access: true
+
+delete question entities:
+  title: 'Delete Question entities'
+
+edit question entities:
+  title: 'Edit Question entities'
+
+access question overview:
+  title: 'Access the Question overview page'
+
+view published question entities:
+  title: 'View published Question entities'
+
+view unpublished question entities:
+  title: 'View unpublished Question entities'

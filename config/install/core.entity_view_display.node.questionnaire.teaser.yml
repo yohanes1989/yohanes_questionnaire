@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.questionnaire.body
+    - node.type.questionnaire
+  module:
+    - text
+    - user
+id: node.questionnaire.teaser
+targetEntityType: node
+bundle: questionnaire
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 60
+    third_party_settings: {}
+  links:
+    weight: 100
+hidden: {}
