@@ -90,4 +90,21 @@ interface QuestionInterface extends  ContentEntityInterface, EntityChangedInterf
      *  Array of correct answers
      */
     public function getCorrectAnswers();
+
+    /**
+     * Returns Question difficulty
+     *
+     * @return int
+     *  Difficulty from 1-5 (Hard)
+     */
+    public function getDifficulty();
+
+    /**
+     * Set Question difficulty
+     *
+     * @param int $difficulty
+     * @return ContentEntityInterface
+     *  Question
+     */
+    public function setDifficulty($difficulty);
 }

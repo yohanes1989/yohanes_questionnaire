@@ -169,6 +169,24 @@ class Question extends ContentEntityBase implements QuestionInterface {
         return $correctAnswers;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getDifficulty()
+    {
+        return $this->get('field_difficulty');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDifficulty($difficulty)
+    {
+        $this->set('field_difficulty', $difficulty);
+
+        return $this;
+    }
+
   /**
    * {@inheritdoc}
    */
@@ -246,6 +264,24 @@ class Question extends ContentEntityBase implements QuestionInterface {
         ))
         ->setDisplayConfigurable('form', TRUE)
         ->setDisplayConfigurable('view', TRUE);
+
+      $fields['field_difficulty'] = BaseFieldDefinition::create('list_integer')
+          ->setLabel(t('Difficulty'))
+          ->setRequired(TRUE)
+          ->setSetting('allowed_values', [
+              1 => t('1 - Easy'),
+              2 => t('2'),
+              3 => t('3 - Moderate'),
+              4 => t('4'),
+              5 => t('5 - Hard'),
+          ])
+          ->setDisplayOptions('form', array(
+              'region' => 'content',
+              'type' => 'options_select',
+              'weight' => 3,
+          ))
+          ->setDisplayConfigurable('form', TRUE)
+          ->setDisplayConfigurable('view', TRUE);
 
     return $fields;
   }

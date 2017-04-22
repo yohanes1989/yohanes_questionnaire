@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_supervisors
+    - node.type.questionnaire
+  module:
+    - entity_reference
+id: node.questionnaire.field_supervisors
+field_name: field_supervisors
+entity_type: node
+bundle: questionnaire
+label: Supervisors
+description: "List of Questionnaire's supervisors"
+required: false
+translatable: true
+default_value: {}
+default_value_callback: ''
+field_type: entity_reference
+settings:
+  handler: 'default'
+  handler_settings:
+    include_anonymous: false

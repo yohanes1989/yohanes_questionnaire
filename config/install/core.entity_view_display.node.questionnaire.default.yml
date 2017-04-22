@@ -2,7 +2,8 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.default
+    - field.field.node.questionnaire.field_supervisors
+    - field.field.node.questionnaire.field_questions
     - field.field.node.questionnaire.body
     - node.type.questionnaire
   module:
@@ -11,21 +12,27 @@ dependencies:
 id: node.questionnaire.default
 targetEntityType: node
 bundle: questionnaire
-mode: teaser
+mode: default
 content:
   body:
     label: above
     type: text_summary_or_trimmed
-    weight: 101
+    weight: 1
     settings:
       trim_length: 60
     third_party_settings: {}
-  questions:
+  field_questions:
     label: above
     type: question_entity_reference_formatter
-    weight: -1
+    weight: 3
     settings: {}
     third_party_settings: {}
+  field_supervisors:
+      label: above
+      type: author
+      weight: 2
+      settings: {}
+      third_party_settings: {}
   links:
     weight: 100
 hidden: {}
