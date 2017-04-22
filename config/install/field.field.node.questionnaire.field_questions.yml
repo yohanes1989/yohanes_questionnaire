@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_questions
+    - node.type.questionnaire
+  module:
+    - entity_reference
+id: node.questionnaire.field_questions
+field_name: field_questions
+entity_type: node
+bundle: questionnaire
+label: Questions
+description: "List of Questionnaire's questions"
+required: true
+translatable: true
+default_value: {}
+default_value_callback: ''
+field_type: entity_reference
+settings:
+  handler: 'default'

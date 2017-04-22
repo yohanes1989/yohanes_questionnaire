@@ -6,8 +6,9 @@ type: module
 core: 8.x
 
 dependencies:
-    - drupal:views
-    - drupal:options
+    - views
+    - options
+    - field
     - entity_reference
     - inline_entity_form
 

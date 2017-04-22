@@ -1,0 +1,39 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.questionnaire.field_questions
+    - field.field.node.questionnaire.body
+    - node.type.questionnaire
+  module:
+    - text
+    - entity_reference
+id: node.questionnaire.default
+targetEntityType: node
+bundle: questionnaire
+mode: default
+content:
+  title:
+    type: string_textfield
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  body:
+    type: text_textarea_with_summary
+    weight: 1
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+  field_questions:
+    weight: 2
+    type: inline_entity_form_complex
+    settings:
+      form_mode: 'default'
+      allow_new: TRUE
+      allow_existing: TRUE
+    third_party_settings: {  }
+hidden: {}

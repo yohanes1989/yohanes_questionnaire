@@ -166,6 +166,7 @@ class Question extends ContentEntityBase implements QuestionInterface {
       ->setDisplayOptions('form', array(
         'type' => 'entity_reference_autocomplete',
         'weight' => 5,
+        'region' => 'hidden',
         'settings' => array(
           'match_operator' => 'CONTAINS',
           'size' => '60',
@@ -177,10 +178,9 @@ class Question extends ContentEntityBase implements QuestionInterface {
       ->setDisplayConfigurable('view', TRUE);
 
     $fields['name'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Name'))
-      ->setDescription(t('The name of the Question entity.'))
+      ->setLabel(t('Question'))
       ->setSettings(array(
-        'max_length' => 50,
+        'max_length' => 255,
         'text_processing' => 0,
       ))
       ->setDefaultValue('')
@@ -193,6 +193,7 @@ class Question extends ContentEntityBase implements QuestionInterface {
         'type' => 'string_textfield',
         'weight' => -4,
       ))
+        ->setRequired(TRUE)
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
@@ -208,6 +209,19 @@ class Question extends ContentEntityBase implements QuestionInterface {
     $fields['changed'] = BaseFieldDefinition::create('changed')
       ->setLabel(t('Changed'))
       ->setDescription(t('The time that the entity was last edited.'));
+
+    $fields['field_answers'] = BaseFieldDefinition::create('question_answer_field')
+        ->setLabel(t('Answers'))
+        ->setDescription(t('Answers that should be selected to answer a Question'))
+        ->setCardinality(BaseFieldDefinition::CARDINALITY_UNLIMITED)
+        ->setRequired(TRUE)
+        ->setDisplayOptions('form', array(
+            'region' => 'content',
+            'type' => 'question_answer_widget',
+            'weight' => 1,
+        ))
+        ->setDisplayConfigurable('form', TRUE)
+        ->setDisplayConfigurable('view', TRUE);
 
     return $fields;
   }
