@@ -145,6 +145,30 @@ class Question extends ContentEntityBase implements QuestionInterface {
     return $this;
   }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getAnswers()
+    {
+        return $this->get('field_answers');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCorrectAnswers()
+    {
+        $correctAnswers = [];
+
+        foreach($this->getAnswers() as $delta => $answer){
+            if($answer->get('is_correct')->getValue()){
+                $correctAnswers[] = $delta + 1;
+            }
+        }
+
+        return $correctAnswers;
+    }
+
   /**
    * {@inheritdoc}
    */
@@ -225,5 +249,4 @@ class Question extends ContentEntityBase implements QuestionInterface {
 
     return $fields;
   }
-
 }

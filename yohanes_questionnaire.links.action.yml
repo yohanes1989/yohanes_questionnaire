@@ -3,3 +3,4 @@ entity.question.add_form:
   title: 'Add Question'
   appears_on:
     - entity.question.collection
+

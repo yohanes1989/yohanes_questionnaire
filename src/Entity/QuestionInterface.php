@@ -4,6 +4,7 @@ namespace Drupal\yohanes_questionnaire\Entity;
 
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityChangedInterface;
+use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\user\EntityOwnerInterface;
 
 /**
@@ -74,4 +75,19 @@ interface QuestionInterface extends  ContentEntityInterface, EntityChangedInterf
    */
   public function setPublished($published);
 
+    /**
+     * Returns Answer fields
+     *
+     * @return FieldItemListInterface
+     *  List of QuestionAnswerField fields
+     */
+    public function getAnswers();
+
+    /**
+     * Get Correct Answers
+     *
+     * @return array
+     *  Array of correct answers
+     */
+    public function getCorrectAnswers();
 }

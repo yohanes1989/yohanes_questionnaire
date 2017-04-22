@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.default
+    - field.field.node.questionnaire.body
+    - node.type.questionnaire
+  module:
+    - text
+    - user
+id: node.questionnaire.default
+targetEntityType: node
+bundle: questionnaire
+mode: teaser
+content:
+  body:
+    label: above
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 60
+    third_party_settings: {}
+  questions:
+    label: above
+    type: question_entity_reference_formatter
+    weight: -1
+    settings: {}
+    third_party_settings: {}
+  links:
+    weight: 100
+hidden: {}

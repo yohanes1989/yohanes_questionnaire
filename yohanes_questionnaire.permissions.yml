@@ -26,3 +26,20 @@ view published question entities:
 
 view unpublished question entities:
   title: 'View unpublished Question entities'
+
+administer questionnaire submission entities:
+  title: 'Administer Questionnaire submission entities'
+  description: 'Allow to access the administration form to configure Questionnaire submission entities.'
+  restrict access: true
+
+delete questionnaire submission entities:
+  title: 'Delete Questionnaire submission entities'
+
+edit questionnaire submission entities:
+  title: 'Edit Questionnaire submission entities'
+
+access questionnaire submission overview:
+  title: 'Access the Questionnaire submission overview page'
+
+view questionnaire submission entities:
+  title: 'View Questionnaire submission entities'

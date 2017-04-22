@@ -1,0 +1,22 @@
+{#
+/**
+ * @file questionnaire_submission.html.twig
+ * Default theme implementation to present Questionnaire submission data.
+ *
+ * This template is used when viewing Questionnaire submission pages.
+ *
+ *
+ * Available variables:
+ * - content: A list of content items. Use 'content' to print all content, or
+ * - attributes: HTML attributes for the container element.
+ *
+ * @see template_preprocess_questionnaire_submission()
+ *
+ * @ingroup themeable
+ */
+#}
+<div{{ attributes.addClass('questionnaire_submission') }}>
+  {% if content %}
+    {{- content -}}
+  {% endif %}
+</div>

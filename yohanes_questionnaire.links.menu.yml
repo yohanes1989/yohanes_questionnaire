@@ -3,7 +3,7 @@
 entity.question.collection:
   title: 'Question list'
   route_name: entity.question.collection
-  description: 'List Question entities'
+  description: 'List Questions'
   parent: system.admin_content
   weight: 100
 
@@ -11,4 +11,19 @@ question.admin.structure.settings:
   title: Question settings
   description: 'Configure Question entities'
   route_name: question.settings
+  parent: system.admin_structure
+
+
+# Questionnaire submission menu items definition
+entity.questionnaire_submission.collection:
+  title: 'Questionnaire submission list'
+  route_name: entity.questionnaire_submission.collection
+  description: 'List Questionnaire submission'
+  parent: system.admin_content
+  weight: 100
+
+questionnaire_submission.admin.structure.settings:
+  title: Questionnaire submission settings
+  description: 'Configure Questionnaire submission entities'
+  route_name: questionnaire_submission.settings
   parent: system.admin_structure
