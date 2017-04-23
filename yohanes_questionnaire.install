@@ -3,6 +3,12 @@
 function yohanes_questionnaire_install()
 {
     user_role_change_permissions(\Drupal\user\RoleInterface::AUTHENTICATED_ID, [
-        'take questionnaire' => TRUE
+        'take questionnaire' => TRUE,
+        'create questionnaire content' => TRUE,
+        'edit own questionnaire content' => TRUE,
+        'delete own questionnaire content' => TRUE,
+        'add question entities' => TRUE,
+        'edit own question entities' => TRUE,
+        'delete own question entities' => TRUE
     ]);
 }

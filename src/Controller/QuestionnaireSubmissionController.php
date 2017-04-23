@@ -3,10 +3,16 @@
 namespace Drupal\yohanes_questionnaire\Controller;
 
 use Drupal\Component\Utility\Xss;
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Render\Renderer;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
+use Drupal\user\UserInterface;
 use Drupal\yohanes_questionnaire\Entity\QuestionnaireSubmissionInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class QuestionnaireSubmissionController.
@@ -17,7 +23,14 @@ use Drupal\yohanes_questionnaire\Entity\QuestionnaireSubmissionInterface;
  */
 class QuestionnaireSubmissionController extends ControllerBase implements ContainerInjectionInterface {
 
-  /**
+    protected $renderer;
+
+    public function __construct(Renderer $renderer)
+    {
+        $this->renderer = $renderer;
+    }
+
+    /**
    * Displays a Questionnaire submission  revision.
    *
    * @param int $questionnaire_submission_revision
@@ -159,5 +172,66 @@ class QuestionnaireSubmissionController extends ControllerBase implements Contai
 
     return $build;
   }
+
+  public function myResultsPage(UserInterface $user)
+  {
+      $view = views_embed_view('my_questionnaire_results', 'embed_1', $user->id());
+
+      $element = [
+          'results' => [
+              '#markup' => $this->renderer->render($view)
+          ]
+      ];
+
+      return $element;
+  }
+
+  public function resultsPage(ContentEntityInterface $node)
+  {
+      $view = views_embed_view('questionnaire_results', 'embed_1', $node->id());
+
+      $element = [
+          'results' => [
+              '#markup' => $this->renderer->render($view)
+          ]
+      ];
+
+      return $element;
+  }
+
+  public function resultsPageTitle(ContentEntityInterface $node)
+  {
+      return t(':questionnaire Results', [':questionnaire' => $node->label()]);
+  }
+
+  public function resultsPageAccess(ContentEntityInterface $node, AccountInterface $account)
+  {
+      $canAccessAllResults = $account->hasPermission('view all questionnaire results');
+      $isOwner = $node->getOwnerId() == $account->id();
+      $isSupervisor = TRUE;
+
+      if($node->hasField('field_supervisors')){
+          $isSupervisor = FALSE;
+
+          $supervisors = $node->get('field_supervisors')->referencedEntities();
+          foreach($supervisors as $supervisor){
+              if($supervisor->id() == $account->id()){
+                  $isSupervisor = TRUE;
+                  continue;
+              }
+          }
+      }
+
+      return AccessResult::allowedIf(($canAccessAllResults || $isSupervisor || $isOwner) && $node->hasField('field_questions'));
+  }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function create(ContainerInterface $container) {
+        return new static(
+            $container->get('renderer')
+        );
+    }
 
 }

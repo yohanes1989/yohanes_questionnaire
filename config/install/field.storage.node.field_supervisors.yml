@@ -4,6 +4,9 @@ dependencies:
   module:
     - node
     - entity_reference
+  enforced:
+    module:
+      - yohanes_questionnaire
 id: node.field_supervisors
 field_name: field_supervisors
 entity_type: node
@@ -15,5 +18,5 @@ locked: false
 cardinality: -1
 translatable: true
 indexes: {  }
-persist_with_no_fields: true
+persist_with_no_fields: false
 custom_storage: false

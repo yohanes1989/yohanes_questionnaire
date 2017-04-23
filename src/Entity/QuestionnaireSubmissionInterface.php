@@ -4,6 +4,8 @@ namespace Drupal\yohanes_questionnaire\Entity;
 
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityChangedInterface;
+use Drupal\Core\Field\EntityReferenceFieldItemListInterface;
+use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\user\EntityOwnerInterface;
 
 /**
@@ -87,4 +89,40 @@ interface QuestionnaireSubmissionInterface extends  ContentEntityInterface, Enti
      *  Questionnaire submission entity
      */
   public function setQuestionnaire($questionnaire);
+
+    /**
+     * Get the Questions
+     *
+     * @return EntityReferenceFieldItemListInterface
+     *  Questions
+     */
+    public function getQuestions();
+
+    /**
+     * Set the Questionnaire
+     *
+     * @param array $questions
+     *  List of Question entities
+     * @return QuestionnaireSubmissionInterface
+     *  Questionnaire submission entity
+     */
+    public function setQuestions($questions);
+
+    /**
+     * Get the Answers
+     *
+     * @return FieldItemListInterface
+     *  Array of Answers
+     */
+    public function getAnswers();
+
+    /**
+     * Set the Answers
+     *
+     * @param array $answers
+     *  List of Answers
+     * @return QuestionnaireSubmissionInterface
+     *  Questionnaire submission entity
+     */
+    public function setAnswers($answers);
 }

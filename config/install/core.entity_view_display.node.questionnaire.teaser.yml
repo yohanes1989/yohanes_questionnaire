@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.teaser
     - field.field.node.questionnaire.field_supervisors
     - field.field.node.questionnaire.field_questions
     - field.field.node.questionnaire.body
@@ -21,18 +22,24 @@ content:
     settings:
       trim_length: 60
     third_party_settings: {}
-  field_questions:
+  field_difficulty:
     label: above
-    type: question_entity_reference_formatter
-    weight: 4
+    type: number_integer
     settings: {}
     third_party_settings: {}
-  field_supervisors:
-    label: above
-    type: author
+    weight: 2
+  links:
+    weight: 100
+hidden:
+  field_questions:
+    label: hidden
+    type: question_entity_reference_formatter
     weight: 3
     settings: {}
     third_party_settings: {}
-  links:
-    weight: 100
-hidden: {}
+  field_supervisors:
+    label: hidden
+    type: author
+    weight: 2
+    settings: {}
+    third_party_settings: {}

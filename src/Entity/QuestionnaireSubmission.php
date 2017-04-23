@@ -131,8 +131,7 @@ class QuestionnaireSubmission extends ContentEntityBase implements Questionnaire
    * {@inheritdoc}
    */
   public function getResult() {
-    $this->get('result')->getValue();
-    return $this;
+    return $this->get('result')->value;
   }
 
   /**
@@ -161,6 +160,80 @@ class QuestionnaireSubmission extends ContentEntityBase implements Questionnaire
 
       return $this;
   }
+
+    /**
+     * {@inheritdoc}
+     */
+  public function getQuestions()
+  {
+      return $this->get('field_questions')->referencedEntities();
+  }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setQuestions($questions)
+    {
+        $processedData = [];
+        foreach($questions as $question){
+            $processedData[] = ['target_id' => $question->id()];
+        }
+
+        return $this->set('field_questions', $processedData);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAnswers()
+    {
+        return $this->get('field_answers')->getValue();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAnswers($answers)
+    {
+        $processedData = [];
+        foreach($answers as $delta => $answer){
+            $processedData[] = implode(',', $answer);
+        }
+
+        return $this->set('field_answers', $processedData);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function preSave(EntityStorageInterface $storage_controller) {
+        parent::preSave($storage_controller);
+
+        $correctAnswers = 0;
+        $totalQuestions = count($this->getQuestions());
+        $answers = $this->getAnswers();
+
+        foreach($this->getQuestions() as $delta => $question) {
+            $selectedAnswers = isset($answers[$delta])?explode(',', $answers[$delta]['value']):[];
+
+            $questionCorrectAnswers = $question->getCorrectAnswers();
+
+            array_walk_recursive($selectedAnswers, function($value, $key) use ($selectedAnswers){
+                if(!$value){
+                    unset($selectedAnswers[$key]);
+                }
+            });
+
+            $diffAnswers = array_diff($questionCorrectAnswers, $selectedAnswers);
+
+            if(count($diffAnswers) == 0){
+                $correctAnswers += 1;
+            }
+        }
+
+        $result = $correctAnswers/$totalQuestions * 100;
+        $this->setResult($result);
+    }
 
     /**
    * {@inheritdoc}
@@ -249,6 +322,56 @@ class QuestionnaireSubmission extends ContentEntityBase implements Questionnaire
     $fields['changed'] = BaseFieldDefinition::create('changed')
       ->setLabel(t('Changed'))
       ->setDescription(t('The time that the entity was last edited.'));
+
+    $fields['field_questions'] = BaseFieldDefinition::create('entity_reference')
+        ->setLabel(t('Questions'))
+        ->setCardinality(BaseFieldDefinition::CARDINALITY_UNLIMITED)
+        ->setSettings([
+            'handler' => 'default',
+            'target_type' => 'question'
+        ])
+        ->setDisplayOptions('form', [
+            'type' => 'inline_entity_form_complex',
+            'settings' => [
+                'form_mode' => 'default',
+                'allow_new' => FALSE,
+                'allow_existing' => FALSE
+            ],
+            'weight' => 5
+        ])
+        ->setDisplayOptions('display', [
+            'region' => 'content',
+            'type' => 'entity_reference_label',
+            'settings' => [
+                'link' => FALSE,
+            ],
+            'weight' => 5
+        ])
+        ->setRequired(TRUE)
+        ->setDisplayConfigurable('form', TRUE)
+        ->setDisplayConfigurable('view', TRUE);
+
+      $fields['field_answers'] = BaseFieldDefinition::create('string')
+          ->setLabel(t('Answers'))
+          ->setCardinality(BaseFieldDefinition::CARDINALITY_UNLIMITED)
+          ->setSettings([
+              'max_length' => 255,
+          ])
+          ->setDisplayOptions('form', [
+              'type' => 'string_textfield',
+              'settings' => [
+                  'size' => 60,
+              ],
+              'weight' => 6
+          ])
+          ->setDisplayOptions('display', [
+              'region' => 'content',
+              'type' => 'string',
+              'weight' => 6
+          ])
+          ->setRequired(TRUE)
+          ->setDisplayConfigurable('form', TRUE)
+          ->setDisplayConfigurable('view', TRUE);
 
     return $fields;
   }

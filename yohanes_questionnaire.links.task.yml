@@ -27,6 +27,18 @@ entity.question.delete_form:
   weight: 10
 
 # Questionnaire submission routing definition
+yohanes_questionnaire.results_page:
+  route_name: yohanes_questionnaire.results_page
+  base_route: entity.node.canonical
+  title: 'Questionnaire Results'
+  weight: 8
+
+yohanes_questionnaire.my_results_page:
+  route_name: yohanes_questionnaire.my_results_page
+  base_route: entity.user.canonical
+  title: 'My Questionnaire Results'
+  weight: 8
+
 entity.questionnaire_submission.collection:
   route_name: entity.questionnaire_submission.collection
   title: 'Question Submissions'

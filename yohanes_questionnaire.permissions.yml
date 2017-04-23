@@ -1,45 +1,48 @@
-view questionnaire results:
+view all questionnaire results:
   title: 'View All Questionnaire results'
 
 take questionnaire:
   title: 'Take Questionnaire'
 
 add question entities:
-  title: 'Create new Question entities'
+  title: 'Create new Question'
 
 administer question entities:
-  title: 'Administer Question entities'
+  title: 'Administer Questions'
   description: 'Allow to access the administration form to configure Question entities.'
   restrict access: true
 
 delete question entities:
-  title: 'Delete Question entities'
+  title: 'Delete Question'
+
+delete own question entities:
+  title: 'Delete Own Question'
 
 edit question entities:
-  title: 'Edit Question entities'
+  title: 'Edit Question'
+
+edit own question entities:
+  title: 'Edit Own Question'
 
 access question overview:
   title: 'Access the Question overview page'
 
-view published question entities:
-  title: 'View published Question entities'
-
 view unpublished question entities:
-  title: 'View unpublished Question entities'
+  title: 'View unpublished Question'
 
 administer questionnaire submission entities:
-  title: 'Administer Questionnaire submission entities'
-  description: 'Allow to access the administration form to configure Questionnaire submission entities.'
+  title: 'Administer Questionnaire submission'
+  description: 'Allow to access the administration form to configure Questionnaire submissions.'
   restrict access: true
 
 delete questionnaire submission entities:
-  title: 'Delete Questionnaire submission entities'
+  title: 'Delete Questionnaire submission'
 
 edit questionnaire submission entities:
-  title: 'Edit Questionnaire submission entities'
+  title: 'Edit Questionnaire submission'
 
 access questionnaire submission overview:
   title: 'Access the Questionnaire submission overview page'
 
 view questionnaire submission entities:
-  title: 'View Questionnaire submission entities'
+  title: 'View Questionnaire submission'

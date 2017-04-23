@@ -2,6 +2,8 @@
 
 namespace Drupal\yohanes_questionnaire\Plugin\Field\FieldFormatter;
 
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Field\FieldItemInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\Plugin\Field\FieldFormatter\EntityReferenceFormatterBase;
@@ -72,6 +74,5 @@ class QuestionEntityReferenceFormatter extends EntityReferenceFormatterBase {
       ]);
 
       return $form;
-      //return $elements;
   }
 }

@@ -20,8 +20,8 @@ class QuestionListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildHeader() {
-    $header['id'] = $this->t('Question ID');
-    $header['name'] = $this->t('Name');
+    //$header['id'] = $this->t('Question ID');
+    $header['question'] = $this->t('Question');
     return $header + parent::buildHeader();
   }
 
@@ -30,8 +30,7 @@ class QuestionListBuilder extends EntityListBuilder {
    */
   public function buildRow(EntityInterface $entity) {
     /* @var $entity \Drupal\yohanes_questionnaire\Entity\Question */
-    $row['id'] = $entity->id();
-    $row['name'] = $this->l(
+    $row['question'] = $this->l(
       $entity->label(),
       new Url(
         'entity.question.edit_form', array(

@@ -20,8 +20,10 @@ class QuestionnaireSubmissionListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildHeader() {
-    $header['id'] = $this->t('Questionnaire submission ID');
     $header['name'] = $this->t('Name');
+    $header['result'] = $this->t('Result');
+    $header['submitted_by'] = $this->t('Submitted by');
+    $header['submitted_at'] = $this->t('Submitted at');
     return $header + parent::buildHeader();
   }
 
@@ -30,7 +32,6 @@ class QuestionnaireSubmissionListBuilder extends EntityListBuilder {
    */
   public function buildRow(EntityInterface $entity) {
     /* @var $entity \Drupal\yohanes_questionnaire\Entity\QuestionnaireSubmission */
-    $row['id'] = $entity->id();
     $row['name'] = $this->l(
       $entity->label(),
       new Url(
@@ -39,6 +40,16 @@ class QuestionnaireSubmissionListBuilder extends EntityListBuilder {
         )
       )
     );
+      $row['result'] = $entity->getResult() + 0;
+    $row['submitted_by'] = $this->l(
+        $entity->getOwner()->getAccountName(),
+        new Url(
+            'entity.user.canonical', array(
+                'user' => $entity->getOwner()->id(),
+            )
+        )
+    );
+    $row['submitted_at'] = \Drupal::service('date.formatter')->format($entity->getCreatedTime());
     return $row + parent::buildRow($entity);
   }
 

@@ -4,6 +4,9 @@ dependencies:
   module:
     - node
     - entity_reference
+  enforced:
+    module:
+      - yohanes_questionnaire
 id: node.field_questions
 field_name: field_questions
 entity_type: node

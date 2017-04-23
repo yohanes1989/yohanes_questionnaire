@@ -18,19 +18,30 @@ class QuestionAccessControlHandler extends EntityAccessControlHandler {
    * {@inheritdoc}
    */
   protected function checkAccess(EntityInterface $entity, $operation, AccountInterface $account) {
+      $isOwner = $entity->getOwnerId() == $account->id();
+
     /** @var \Drupal\yohanes_questionnaire\Entity\QuestionInterface $entity */
     switch ($operation) {
       case 'view':
         if (!$entity->isPublished()) {
           return AccessResult::allowedIfHasPermission($account, 'view unpublished question entities');
         }
-        return AccessResult::allowedIfHasPermission($account, 'view published question entities');
 
+          return AccessResult::allowed();
       case 'update':
-        return AccessResult::allowedIfHasPermission($account, 'edit question entities');
+          $permissions = ['edit question entities'];
+          if($isOwner){
+              $permissions[] = 'edit own question entities';
+          }
 
+        return AccessResult::allowedIfHasPermissions($account, $permissions, 'OR');
       case 'delete':
-        return AccessResult::allowedIfHasPermission($account, 'delete question entities');
+          $permissions = ['delete question entities'];
+          if($isOwner){
+              $permissions[] = 'delete own question entities';
+          }
+
+          return AccessResult::allowedIfHasPermissions($account, $permissions, 'OR');
     }
 
     // Unknown operation, no opinion.

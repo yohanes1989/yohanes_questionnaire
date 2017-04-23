@@ -38,12 +38,12 @@ content:
       allow_existing: TRUE
     third_party_settings: {  }
   field_supervisors:
-      weight: 3
-      type: entity_reference_autocomplete
-      settings:
-        match_operator: 'CONTAINS'
-        size: 60
-        autocomplete_type: ''
-        placeholder: ''
-      third_party_settings: {  }
+    weight: 3
+    type: entity_reference_autocomplete
+    settings:
+      match_operator: 'CONTAINS'
+      size: 60
+      autocomplete_type: ''
+      placeholder: ''
+    third_party_settings: {  }
 hidden: {}
