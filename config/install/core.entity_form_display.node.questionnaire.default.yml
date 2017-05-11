@@ -35,7 +35,7 @@ content:
     settings:
       form_mode: 'default'
       allow_new: TRUE
-      allow_existing: TRUE
+      allow_existing: FALSE
     third_party_settings: {  }
   field_supervisors:
     weight: 3
